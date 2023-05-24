@@ -10,12 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:text="TES" />
+        android:text="TES"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/adapter_contact_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="000000" />
+        android:text="000000"
+        android:textColor="@color/black" />
 
 </LinearLayout>

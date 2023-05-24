@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     private AdapterContact adapterContact;
     private Button btnAddMember;
     private ListView listViewMember;
+    private ArrayList<Contact> contactArrayList;
+
+    private ContactHandler contactHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         btnAddMember = (Button) findViewById(R.id.btnAddMember);
         listViewMember = (ListView) findViewById(R.id.listViewMember);
 
-        ContactHandler contactHandler = new ContactHandler(MainActivity.this);
+        contactHandler = new ContactHandler(MainActivity.this);
         Log.d("ADD", "TAMBAH DATA");
 
 //        tambahkan data contact
@@ -37,17 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
 //        tampilkan data
         Log.d("VIEW", "TAMPILKAN DATA");
-        ArrayList<Contact> contactArrayList = contactHandler.getAllContacts();
+        contactArrayList = contactHandler.getAllContacts();
 
         adapterContact = new AdapterContact(MainActivity.this, contactArrayList);
         listViewMember.setAdapter(adapterContact);
 
-//        for (Contact contact : contactArrayList) {
-//            String baris = contact.getId() + " - " + contact.getNama() + " - " + contact.getNoHp();
-//            Log.d("DATA : ", baris);
-//        }
-
         clickBtnAddMember();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        contactArrayList = contactHandler.getAllContacts();
+
+        adapterContact.notifyDataSetChanged();
     }
 
     public void clickBtnAddMember(){
@@ -55,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this, addMember.class);
-
+//                intent.putExtra("contactArraylist", contactArrayList);
                 startActivity(intent);
             }
         });
