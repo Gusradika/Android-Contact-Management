@@ -19,12 +19,27 @@
         <requestFocus />
     </EditText>
 
+    <EditText
+        android:id="@+id/editTextAddNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Telephone Number..." />
+
     <Button
         android:id="@+id/btnAddName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Add"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnCancelAddMember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Cancel"
         android:textAllCaps="false" />
 
 </LinearLayout>

@@ -42,16 +42,16 @@ public class ContactHandler extends SQLiteOpenHelper {
 
     public void addContact(Contact contact) {
         db = this.getWritableDatabase();    // mendapatkan db yang ada di dalam file ini
-        // yang dapat dimodify (CREATE)
+                                            // yang dapat dimodify (CREATE)
 
         ContentValues values = new ContentValues();     // menciptakan element yang dapat digunakan
-        // untuk menyimpan value yang akan dimasukkan ke db
+                                                        // untuk menyimpan value yang akan dimasukkan ke db
 
         values.put(COL_NAME, contact.getNama());    // memasukkan contact name ke dalam value
         values.put(COL_NO, contact.getNoHp());      // memasukkan contact phone ke dalam value
 
-        db.insert(DICTIONARY_TABLE_NAME, null, values) ;     // masukkan data yang telah
-        // dimasukkan ke values ke dalam database
+        db.insert(DICTIONARY_TABLE_NAME, null, values);     // masukkan data yang telah
+                                                                        // dimasukkan ke values ke dalam database
 
         db.close();         // tutup database
     }
@@ -85,7 +85,8 @@ public class ContactHandler extends SQLiteOpenHelper {
             do {
                 Contact contact = new Contact();  // declare class contact baru
 
-                contact.setId(Integer.valueOf(cursor.getString(0)));   // set id
+//                contact.setId(Integer.valueOf(cursor.getString(0)));   // set id
+                contact.setId(cursor.getInt(0));        // set id
                 contact.setNama(cursor.getString(1));   // set nama contact
                 contact.setNoHp(cursor.getString(2));   // set no hp contact
 

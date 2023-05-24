@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
     <Button
@@ -17,7 +18,7 @@
     <ListView
         android:id="@+id/listViewMember"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="630dp"
         android:dividerHeight="2dp" />
 
 </LinearLayout>
