@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("VIEW", "TAMPILKAN DATA");
         ArrayList<Contact> contactArrayList = contactHandler.getAllContacts();
 
-//        adapterContact = new AdapterContact(MainActivity.this, contactArrayList);
-//        listViewMember.setAdapter(adapterContact);
+        adapterContact = new AdapterContact(MainActivity.this, contactArrayList);
+        listViewMember.setAdapter(adapterContact);
 
 //        for (Contact contact : contactArrayList) {
 //            String baris = contact.getId() + " - " + contact.getNama() + " - " + contact.getNoHp();
