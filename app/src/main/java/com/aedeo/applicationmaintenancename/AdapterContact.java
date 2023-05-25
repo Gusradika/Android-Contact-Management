@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class AdapterContact extends BaseAdapter {
@@ -15,7 +17,7 @@ public class AdapterContact extends BaseAdapter {
     ArrayList<Contact> contactArrayList;
 
     LayoutInflater layoutInflater;
-
+    int itteration = 0;
     public AdapterContact() {
 
     }
@@ -43,10 +45,12 @@ public class AdapterContact extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = layoutInflater.inflate(R.layout.layout_adapter_contact, null);
-
+        itteration++;
         TextView adapterNameContact = (TextView) view.findViewById(R.id.adapter_contact_name);
         TextView adapterNumContact = (TextView) view.findViewById(R.id.adapter_contact_num);
+        TextView adapterHiddenIndex = (TextView) view.findViewById(R.id.adapter_item_index);
 
+        adapterHiddenIndex.setText(String.valueOf(itteration));
         adapterNameContact.setText(contactArrayList.get(i).getNama());
         adapterNumContact.setText(contactArrayList.get(i).getNoHp());
 

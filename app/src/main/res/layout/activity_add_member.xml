@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter name...">
+        android:hint="Masukan Nama...">
 
         <requestFocus />
     </EditText>
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Telephone Number..." />
+        android:hint="Masukan Nomor Telepon..." />
 
     <Button
         android:id="@+id/btnAddName"

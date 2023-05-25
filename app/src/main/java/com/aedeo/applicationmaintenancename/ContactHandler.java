@@ -5,19 +5,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
 public class ContactHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
     private static final String DICTIONARY_TABLE_NAME = "contactsManager";
     private static final String DATABASE_NAME = "contacts";
     private static final String COL_ID = "id";
     private static final String COL_NAME = "nama";
     private static final String COL_NO = "no_hp";
-    private static final String DICTIONARY_TABLE_CREATE = "CREATE TABLE " + DICTIONARY_TABLE_NAME + " (" + COL_ID + " INTEGER," + COL_NAME + "  TEXT," + COL_NO + " TEXT)";
+    private static final String DICTIONARY_TABLE_CREATE = "CREATE TABLE " + DICTIONARY_TABLE_NAME + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_NAME + "  TEXT," + COL_NO + " TEXT)";
 
     SQLiteDatabase db;
 
@@ -37,7 +38,8 @@ public class ContactHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + DICTIONARY_TABLE_NAME);
+        onCreate(db);
     }
 
     public void addContact(Contact contact) {
@@ -58,6 +60,10 @@ public class ContactHandler extends SQLiteOpenHelper {
 
     public Contact getContact(Integer id) {
         db = this.getReadableDatabase();            // dapatkan database yang dapat dibaca (READ)
+        id++;
+        Log.d("ID SEKARANG", String.valueOf(id));
+
+
 
         Cursor cursor = db.query(
                 DICTIONARY_TABLE_NAME,                      // nama table
@@ -65,9 +71,16 @@ public class ContactHandler extends SQLiteOpenHelper {
                 COL_ID + "=?",
                 new String[]{String.valueOf(id)},
                 null, null, null, null);
-
         if (cursor != null) {
             cursor.moveToFirst();       // jika cursor telah terisi maka pindahkan cursor ke bagian paling awal
+            int idx = cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME));
+            int number = cursor.getInt(cursor.getColumnIndexOrThrow(COL_NO));
+
+            Log.d("FF", String.valueOf(idx));
+            Log.d("GG", name);
+            Log.d("HH", String.valueOf(number));
+
         }
 
         Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
@@ -96,14 +109,17 @@ public class ContactHandler extends SQLiteOpenHelper {
         return contactArrayList;
     }
 
-    public Integer updateContact(Contact contact) {
+    public void updateContact(Contact contact) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        Log.d("IN CONTACT",contact.getNama());
+        Log.d("IN CONTACT",contact.getNoHp() );
         values.put(COL_NAME, contact.getNama());
         values.put(COL_NO, contact.getNoHp());
 
-        return db.update(DICTIONARY_TABLE_NAME, values, COL_ID + "=?", new String[]{String.valueOf(contact.getId())});
+        db.update(DICTIONARY_TABLE_NAME, values, COL_ID + "=?",
+                new String[]{String.valueOf(contact.getId())});
     }
 
     public void deleteContact(Contact contact) {

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 import java.util.ArrayList;
 
 public class addMember extends AppCompatActivity {
@@ -18,20 +19,18 @@ public class addMember extends AppCompatActivity {
     ArrayList<Contact> contactArrayList;
     ContactHandler contactHandler;
 
-    Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
 
-        context = new MainActivity();
+//        context = new MainActivity();
         btnAddName = (Button) findViewById(R.id.btnAddName);
         btnCancelAddMember = (Button) findViewById(R.id.btnCancelAddMember);
         editTextAddName = (EditText) findViewById(R.id.editTextAddName);
         editTextAddNum = (EditText) findViewById(R.id.editTextAddNum);
 
-        contactHandler = new ContactHandler(context);
+        contactHandler = new ContactHandler(this);
 
 //        contactArrayList = (ArrayList<Contact>) getIntent().getSerializableExtra("contactArraylist");
 
@@ -46,6 +45,8 @@ public class addMember extends AppCompatActivity {
             public void onClick(View view) {
                 String name = editTextAddName.getText().toString();
                 String telephoneNum = editTextAddNum.getText().toString();
+//                Log.d("ERROR", editTextAddName.getText().toString());
+//                Log.d("ERROR", editTextAddNum.getText().toString());
 
                 contactHandler.addContact(new Contact(name, telephoneNum));
 
@@ -53,7 +54,8 @@ public class addMember extends AppCompatActivity {
 //                    String baris = contact.getId() + " - " + contact.getNama() + " - " + contact.getNoHp();
 //                    Log.d("DATA :   ", baris);
 //                }
-//                finish();
+                Log.d("SETTING NAME", name);
+                finish();
             }
         });
     }
